@@ -4,8 +4,12 @@ Q1-
 Q2-
 ![Screenshot 2024-04-23 222343](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/fbf4dbbd-755a-4327-9295-f177e6f3b57c)
 
+![Screenshot 2024-04-23 225904](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/7f8996c7-69d9-4356-afb2-044805e7cc62)
+
 Q3-
 ![Screenshot 2024-04-23 222143](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/1a5b520e-edba-48d8-a174-cf34ca3aedfe)
+
+![Screenshot 2024-04-23 225913](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/82d3c3dd-a9d9-45dc-bf06-ec763ddab91f)
 
 Q4-
 ![Screenshot 2024-04-23 222543](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/5967e5f6-e5ee-4224-a48b-0576767d8a77)
