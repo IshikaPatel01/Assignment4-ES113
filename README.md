@@ -35,6 +35,6 @@ Open a terminal or command prompt and enter the command flask run
 ![Screenshot 2024-04-23 223924](https://github.com/IshikaPatel01/Assignment4-ES113/assets/143334294/28b713c9-da65-40e0-807b-34cc93d19349)
 
 Once the Flask application is running, open a web browser.
-Go to http://127.0.0.1:5000/ or http://localhost:5000/ to access the website locally.
+Go to the webpage which gets displayed on the command prompt to access the website locally.
 You should see a form with input fields for bond number, name of the purchaser, political party name, political donations name, and company donations name.
 Fill in the form fields and click the "Submit" button.
