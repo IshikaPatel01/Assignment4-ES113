@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    
+</script>
+<body>
+
+
+<form action="" method="get">
+  <label for="bond-number">1. Enter bond number: </label><br>
+  <input type="text" id="bond-number" name="bond-number" value=""><br>
+  <label for="name_of_purchaser">1. Enter name of purchaser: </label><br>
+  <input type="text" id="name_of_purchaser" name="name_of_purchaser" value=""><br>
+  <label for="political-party-name">1. enter party name: </label><br>
+  <input type="text" id="political-party-name" name="political-party-name" value=""><br>
+  <label for="political_donations_name">1. enter POLITICAL DONATIONS NAME: </label><br>
+  <input type="text" id="political_donations_name" name="political_donations_name" value=""><br>
+  <label for="companydonationsname">1. enter company DONATIONS NAME: </label><br>
+  <input type="text" id="companydonationsname" name="companydonationsname" value=""><br>
+  <input type="submit" value="Submit">
+
+
+</form> 
+
+<p>click submit</p>
+
+<!--Question 1-->
+{%if bond_data%}
+<h5>Q1</h5>
+{%for x in bond_data%}
+
+<table>
+    <tr>
+        {%for i in x["headers"]%}
+            <th>{{i}}</th>
+        {%endfor%}
+    </tr>
+
+    {%for j in x["data"]%}
+    <tr>
+        {%for i in j%}
+            <td>{{i}}</td>
+        {%endfor%}
+    </tr>  
+    {%endfor%}  
+</table>
+<br>
+{%endfor%} 
+
+{%endif%}
+
+
+{%if companydata%}
+<p>2.</p>
+<table>
+    <tr>
+        <th>Year</th>
+        <th>Number of Bonds</th>
+        <th>Total value of bonds</th>
+    </tr>
+    {%for row in companydata%}
+    <tr>
+        {%for item in row%}
+        <td>{{item}}</td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+</table> 
+{%endif%}
+
+{%if politicalpartydata%}
+<p>3.</p>
+<table>
+    <tr>
+        <th>Year</th>
+        <th>Number of Bonds</th>
+        <th>Total value of bonds</th>
+    </tr>
+    {%for row in politicalpartydata%}
+    <tr>
+        {%for item in row%}
+        <td>{{item}}</td>
+        {%endfor%}
+    </tr>
+    {%endfor%} 
+</table>
+{%endif%}
+
+
+{%if politicaldonationsdata%}
+<p>4.</p>
+<table>
+    <tr>
+        <th>Company/Individual</th>
+        <th>Amount Donated to Political Party</th>
+    </tr>
+    {%for row in politicaldonationsdata%}
+    <tr>
+        {%for item in row%}
+        <td>{{item}}</td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+</table>
+{%endif%}
+
+
+{%if companydonationsdata%}
+    <p>5.</p>
+    <table>
+        <tr>
+            <th>Political Party</th>
+            <th>Amount Donated by Company</th>
+        </tr>
+        {%for row in companydonationsdata%}
+        <tr>
+            {%for item in row%}
+            <td>{{item}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+    {%endif%}
+
+    <p>6.</p>
+    <div >
+        <canvas id="total_donations_data_chart"></canvas>
+    </div>
+    
+    <script>
+        function Decimal(string){
+        return parseInt(string,10);
+        }
+        const donations_data={{total_donations_data|safe}};
+        new Chart("total_donations_data_chart", {
+                type: "pie",
+                data: 
+                {
+                    labels: donations_data.map(x => x[0]),
+                    datasets: 
+                    [{
+                        borderColor: "#FFFFFF",
+                        data: donations_data.map(x => x[1]),
+                    }],
+                }
+            });
+            
+        
+
+
+    </script>
+</body>
