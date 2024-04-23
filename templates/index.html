@@ -52,17 +52,17 @@
 
 
 {%if companydata%}
-<p>2.</p>
+<p>Q2.</p>
 <table>
     <tr>
-        <th>Year</th>
-        <th>Number of Bonds</th>
-        <th>Total value of bonds</th>
+        <th>Purchase year</th>
+        <th>No. of Bonds</th>
+        <th>Total bonds</th>
     </tr>
     {%for row in companydata%}
     <tr>
-        {%for item in row%}
-        <td>{{item}}</td>
+        {%for i in row%}
+        <td>{{i}}</td>
         {%endfor%}
     </tr>
     {%endfor%}
@@ -79,8 +79,8 @@
     </tr>
     {%for row in politicalpartydata%}
     <tr>
-        {%for item in row%}
-        <td>{{item}}</td>
+        {%for i in row%}
+        <td>{{i}}</td>
         {%endfor%}
     </tr>
     {%endfor%} 
@@ -92,13 +92,13 @@
 <p>4.</p>
 <table>
     <tr>
-        <th>Company/Individual</th>
+        <th>Company</th>
         <th>Amount Donated to Political Party</th>
     </tr>
     {%for row in politicaldonationsdata%}
     <tr>
-        {%for item in row%}
-        <td>{{item}}</td>
+        {%for i in row%}
+        <td>{{i}}</td>
         {%endfor%}
     </tr>
     {%endfor%}
@@ -115,8 +115,8 @@
         </tr>
         {%for row in companydonationsdata%}
         <tr>
-            {%for item in row%}
-            <td>{{item}}</td>
+            {%for i in row%}
+            <td>{{i}}</td>
             {%endfor%}
         </tr>
         {%endfor%}
@@ -126,6 +126,9 @@
     <p>6.</p>
     <div >
         <canvas id="total_donations_data_chart"></canvas>
+        <div class="chartBox"><canvas id="companydatachart" ></canvas></div>
+        <div class="chartBox"><canvas id="companydatachart2" ></canvas></div>
+        
     </div>
     
     <script>
@@ -133,6 +136,8 @@
         return parseInt(string,10);
         }
         const donations_data={{total_donations_data|safe}};
+        const companytable={{companydata | safe}};
+
         new Chart("total_donations_data_chart", {
                 type: "pie",
                 data: 
@@ -140,11 +145,42 @@
                     labels: donations_data.map(x => x[0]),
                     datasets: 
                     [{
-                        borderColor: "#FFFFFF",
+                        
                         data: donations_data.map(x => x[1]),
                     }],
                 }
             });
+
+            new Chart("companydatachart", {
+				type: "bar",
+				data: 
+				{
+					labels: companytable.map(x => x[0]),
+					datasets: 
+					[{
+                        label: "Number of bonds vs Year",
+					
+						
+						data: companytable.map(x => x[1])
+					}],
+				}
+			}
+        );
+
+        new Chart("companydatachart2", {
+				type: "bar",
+				data: 
+				{
+					labels: companytable.map(x => x[0]),
+					datasets: 
+					[{
+                        label: "Value of bonds vs Year",
+					
+					
+						data: companytable.map(x => x[2])
+					}],
+				}
+			});
             
         
 

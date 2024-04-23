@@ -2,11 +2,6 @@
 from  flask import Flask, render_template, send_from_directory, request
 from flask_mysqldb import MySQL
 import numpy as np
-# import os
-
-
-# if not os.path.exists("Server.py"):
-    # raise RuntimeError("Incorrect Working Directory: set directory to Server")
 
 
 app = Flask(__name__)
@@ -25,7 +20,7 @@ def Home():
     bond_number=request.args.get("bond-number")
     bond_no_data=None
     def tuple2list(tup):
-        return list(map(lambda x: list(x), tup))
+        return [list(inner_tuple) for inner_tuple in tup]
     cur=mysql.connection.cursor()
     cur.execute("""use ES113;""")
     
@@ -47,8 +42,7 @@ def Home():
         
     company=request.args.get("name_of_purchaser")
     companydata=None 
-    def tuple2list(tup):
-        return list(map(lambda x: list(x), tup))
+  
     
     if company:
         cur.execute("""select extract(year from purchase), count(bond),sum(denom) from pd where name_of_purchaser = '{name}' group by extract(year from purchase) ;""".format(name=company.upper()))
@@ -70,9 +64,10 @@ def Home():
     politicaldonationsdata=None
     
     if politicaldonations:
-        cur.execute("""select P.name_of_purchaser, sum(P.denom) from pd as P, (select bondno from pp where partu = '{name}') as E where P.bond = E.bondno group by P.name_of_purchaser;""".format(name=politicaldonations.upper()))
+        cur.execute("""select i.name_of_purchaser, sum(i.denom) from pd as i, (select bondno from pp where partu = '{name}') as j where i.bond = j.bondno group by i.name_of_purchaser;""".format(name=politicaldonations.upper()))
         politicaldonationsdata=tuple2list(cur.fetchall())
     # return render_template("index.html",bond_data=bond_no_data, companydata=companydata, politicalpartydata=politicalpartydata,politicaldonationsdata=politicaldonationsdata)
+ 
  #question 5
 
     companydonations=request.args.get("companydonationsname")
